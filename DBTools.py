@@ -63,8 +63,8 @@ def loadDB(filepath):
         for attribute in ["id", "name", "students", "advisors", "wikiUrl", "wikiImage", "degreeLists"]:
             value = data.get(key).get(attribute)
             if value:
-                command += f'attribute="{value}"'
-        client.command(command)
+                command += f'{attribute}="{value},"'
+        client.command(command.rstrip(","))
         # print(key,values)
         # return
         # client.command("CREATE VERTEX Person SET id = '" + key + "'")
