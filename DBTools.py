@@ -22,24 +22,8 @@ def printJSONDB(filepath):
     with open(filepath) as f:
         data = json.load(f)
 
-    for key in data:
-        name = data.get(key).get("name")
-        wikiUrl = data.get(key).get("wikiUrl")
-        wikiImage = data.get(key).get("wikiImage")
-        degreeLists = data.get(key).get("degreeLists")
-
-        print("json key:\t\t" + key)
-        print("name:\t\t\t" + name)
-
-        # Most people are on Wikipedia, but not everyone
-        if wikiUrl is not None:
-            print("wikiUrl:\t\t" + wikiUrl)
-        if wikiImage is not None:
-            print("wikiImage:\t\t" + wikiImage)
-
-        print("degreeLists:\t", end=" ")
-        print(degreeLists)
-        print("")
+    formatted_data = json.dumps(data,indent=2)
+    print(formatted_data)
 
 
 def loadDB(filepath):
