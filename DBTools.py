@@ -63,7 +63,7 @@ def loadDB(filepath):
         for attribute in ["id", "name", "students", "advisors", "wikiUrl", "wikiImage", "degreeLists"]:
             value = data.get(key).get(attribute)
             if value:
-                command += f"attribute={value}"
+                command += f'attribute="{value}"'
         client.command(command)
         # print(key,values)
         # return
