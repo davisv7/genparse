@@ -22,21 +22,21 @@ printJSONDB(filepath)
 #comment the load command after the database is loaded
 loadDB(filepath)
 
-#load the JSON database so we can randomly pick a key for shortest path testing
-with open(filepath) as f:
-    data = json.load(f)
-
-#Cody's JSON id is 1, because why not?
-codyid = 1
-
-#grab a random identifier
-randomPerson = random.choice(list(data.keys()));
-
-#Nicolaus Copernicus JSON id is 126177
-#Distance between Cody and Copernicus
-print(shortestPath(codyid,126177))
-
-#Distance between Cody and some rando
-print(shortestPath(codyid,randomPerson))
-#print rando info
-print(data.get(randomPerson))
+# #load the JSON database so we can randomly pick a key for shortest path testing
+# with open(filepath) as f:
+#     data = json.load(f)
+#
+# #Cody's JSON id is 1, because why not?
+# codyid = 1
+#
+# #grab a random identifier
+# randomPerson = random.choice(list(data.keys()));
+#
+# #Nicolaus Copernicus JSON id is 126177
+# #Distance between Cody and Copernicus
+# print(shortestPath(codyid,126177))
+#
+# #Distance between Cody and some rando
+# print(shortestPath(codyid,randomPerson))
+# #print rando info
+# print(data.get(randomPerson))
