@@ -51,7 +51,7 @@ def loadDB(filepath):
     client.command("CREATE PROPERTY Person.advisors EMBEDDEDLIST Integer")
     client.command("CREATE PROPERTY Person.wikiURL String")
     client.command("CREATE PROPERTY Person.wikiImage String")
-    client.command("CREATE PROPERTY Person.degreeLists EMBEDDEDMAP String String")
+    client.command("CREATE PROPERTY Person.degreeLists EMBEDDEDMAP String")
 
     # open and parse local json file
     with open(filepath) as f:
