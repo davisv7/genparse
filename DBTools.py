@@ -59,11 +59,15 @@ def loadDB(filepath):
 
     # loop through each key in the json database and create a new vertex, V with the id in the database
     for key,values in data.items():
-        (id, name, students, advisors, wikiURL, wikiImage, degreeLists, _) = values
+        command=f"CREATE VERTEX Person SET "
+        for attribute in ["id", "name", "students", "advisors", "wikiUrl", "wikiImage", "degreeLists"]:
+            value = data.get(key).get(attribute)
+            if value:
+                command += f"attribute={value}"
+        client.command(command)
         # print(key,values)
         # return
-        client.command(f"CREATE VERTEX Person SET id = {id} , wikiURL = {wikiURL}, wikiImage = {wikiImage},degreeLists={degreeLists}")
-        client.command("CREATE VERTEX Person SET id = '" + key + "'")
+        # client.command("CREATE VERTEX Person SET id = '" + key + "'")
 
     # loop through each key creating edges from advisor to advisee
     for key in data:
