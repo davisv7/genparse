@@ -60,20 +60,17 @@ def loadDB(filepath):
     # loop through each key in the json database and create a new vertex, V with the id in the database
     for key,values in data.items():
         (id, name, students, advisors, wikiURL, wikiImage, degreeLists, _) = values
-        print(key,values)
-        return
-    #     client.command(f"CREATE VERTEX Person SET id = {id} , "
-    #                    f"wikiURL = {}, "
-    #                    f"wikiImage = {},"
-    #                    f"degreeLists".format())
-    #     client.command("CREATE VERTEX Person SET id = '" + key + "'")
-    #
-    # # loop through each key creating edges from advisor to advisee
-    # for key in data:
-    #     advisorNodeId = str(getrid(client, key))
-    #     for student in data.get(key)["students"]:
-    #         studentNodeId = str(getrid(client, student))
-    #         client.command("CREATE EDGE FROM " + advisorNodeId + " TO " + studentNodeId)
+        # print(key,values)
+        # return
+        client.command(f"CREATE VERTEX Person SET id = {id} , wikiURL = {wikiURL}, wikiImage = {wikiImage},degreeLists={degreeLists}")
+        client.command("CREATE VERTEX Person SET id = '" + key + "'")
+
+    # loop through each key creating edges from advisor to advisee
+    for key in data:
+        advisorNodeId = str(getrid(client, key))
+        for student in data.get(key)["students"]:
+            studentNodeId = str(getrid(client, student))
+            client.command("CREATE EDGE FROM " + advisorNodeId + " TO " + studentNodeId)
 
     client.close()
 
