@@ -16,7 +16,7 @@ from DBTools import shortestPath
 filepath = 'master.json'
 
 #example of how to parse elements from JSON file
-printJSONDB(filepath)
+# printJSONDB(filepath)
 
 #loadDB with JSON data, removing existing database if it exist
 #comment the load command after the database is loaded
