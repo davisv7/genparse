@@ -14,7 +14,7 @@ def reset_db(client, name):
 
 
 def getrid(client, id):
-    nodeId = client.query("SELECT FROM V WHERE id = '" + str(id) + "'")
+    nodeId = client.query("SELECT FROM PERSON WHERE id = '" + str(id) + "'")
     return str(nodeId[0]._rid)
 
 
@@ -63,8 +63,9 @@ def loadDB(filepath):
         for attribute in ["id", "name", "students", "advisors", "wikiUrl", "wikiImage", "degreeLists"]:
             value = data.get(key).get(attribute)
             if value:
-                command += f'{attribute}="{value},"'
-        client.command(command.rstrip(","))
+                command += f'"{attribute}"="{value}",'
+        print(command.rstrip(","))
+        # client.command(command.rstrip(","))
         # print(key,values)
         # return
         # client.command("CREATE VERTEX Person SET id = '" + key + "'")
