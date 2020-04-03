@@ -14,7 +14,7 @@ def reset_db(client, name):
 
 
 def getrid(client, id):
-    nodeId = client.query("SELECT FROM PERSON WHERE id = '" + str(id) + "'")
+    nodeId = client.query(f'SELECT FROM PERSON WHERE id = "{id}"')
     return str(nodeId[0]._rid)
 
 
@@ -22,7 +22,7 @@ def printJSONDB(filepath):
     with open(filepath) as f:
         data = json.load(f)
 
-    formatted_data = json.dumps(data,indent=2)
+    formatted_data = json.dumps(data, indent=2)
     print(formatted_data)
 
 
@@ -58,12 +58,12 @@ def loadDB(filepath):
         data = json.load(f)
 
     # loop through each key in the json database and create a new vertex, V with the id in the database
-    for key,values in data.items():
-        command=f"CREATE VERTEX Person SET "
-        for attribute in ["id", "name", "students", "advisors", "wikiUrl", "wikiImage", "degreeLists"]:
+    for key, values in data.items():
+        command = f"CREATE VERTEX Person SET "
+        for attribute in ["id", "name", "wikiUrl", "wikiImage"]:
             value = data.get(key).get(attribute)
             if value:
-                command += f'"{attribute}"="{value}",'
+                command += f'{attribute}="{value}",'
         print(command.rstrip(","))
         # client.command(command.rstrip(","))
         # print(key,values)
