@@ -126,4 +126,6 @@ def allLongestPaths(personID):
     nodeID = getrid(client, personID)
     cmd = f'SELECT $path AS path FROM (TRAVERSE in("E") FROM {nodeID} STRATEGY BREADTH_FIRST) ORDER BY path.size() DESC'
     response = client.command(cmd)
+    for record in response:
+        print(f"Maximum distance betweeen {PersonID} and {record}")
     print(response)
