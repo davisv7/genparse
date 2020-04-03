@@ -2,7 +2,7 @@ import json
 import random
 from DBTools import printJSONDB
 from DBTools import loadDB
-from DBTools import shortestPath
+from DBTools import shortestPath,allLongestPaths
 
 #Make sure orientDB version 2.2 is running, version 3.x does not work with these drivers
 
@@ -30,17 +30,18 @@ with open(filepath) as f:
 codyid = 1
 
 #grab a random identifier
-randomPerson = random.choice(list(data.keys()));
+# randomPerson = random.choice(list(data.keys()));
 
 #Nicolaus Copernicus JSON id is 126177
 #Distance between Cody and Copernicus
-print(shortestPath(codyid,126177))
+# print(shortestPath(codyid,126177))
 
 #Gregory Palamas JSON id is 176844
 #Distance between Cody and Palamas
 print(f"Distance between Cody and Palamas-san: {shortestPath(codyid,176844)}")
 
 #Distance between Cody and some rando
-print(shortestPath(codyid,randomPerson))
+# print(shortestPath(codyid,randomPerson))
 #print rando info
-print(data.get(randomPerson))
+# print(data.get(randomPerson))
+allLongestPaths(codyid)

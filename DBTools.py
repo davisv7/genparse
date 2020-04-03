@@ -104,9 +104,26 @@ def shortestPath(personIdA, personIdB):
     # get distance
     distance = len(pathlist[0].__getattr__('shortestPath'))
 
+    print(f"Nodes between {personIdA} and {personIdB}")
     for node in pathlist[0].__getattr__('shortestPath'):
         print(node)
 
     # pyorient.otypes.OrientRecord
     client.close()
     return distance
+
+
+def allLongestPaths(personID):
+    dbname = "agen"
+    login = "root"
+    password = "rootpwd"
+
+    client = pyorient.OrientDB("localhost", 2424)
+
+    client.db_open(dbname, login, password)
+
+    # get the RID of the two people
+    nodeID = getrid(client, personID)
+    cmd = f'SELECT $path AS path FROM (TRAVERSE in("E") FROM {nodeID} STRATEGY BREADTH_FIRST) ORDER BY path.size() DESC'
+    response = client.command(cmd)
+    print(response)
