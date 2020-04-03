@@ -69,7 +69,7 @@ def loadDB(filepath):
                 else:
                     command += f'{attribute}="{value}",'
         print(command.rstrip(","))
-        # client.command(command.rstrip(","))
+        client.command(command.rstrip(","))
         # print(key,values)
         # return
         # client.command("CREATE VERTEX Person SET id = '" + key + "'")
