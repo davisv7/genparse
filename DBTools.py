@@ -47,6 +47,7 @@ def loadDB(filepath):
     # create class with all attributes
     client.command("CREATE CLASS Person EXTENDS V")
     client.command("CREATE PROPERTY Person.id Integer")
+    client.command("CREATE PROPERTY Person.name String")
     client.command("CREATE PROPERTY Person.students EMBEDDEDLIST Integer")
     client.command("CREATE PROPERTY Person.advisors EMBEDDEDLIST Integer")
     client.command("CREATE PROPERTY Person.wikiURL String")
@@ -60,7 +61,7 @@ def loadDB(filepath):
     # loop through each key in the json database and create a new vertex, V with the id in the database
     for key, values in data.items():
         command = f"CREATE VERTEX Person SET "
-        for attribute in ["id", "name", "wikiUrl", "wikiImage"]:
+        for attribute in ["id", "name", "students", "advisors", "wikiUrl", "wikiImage", "degreeLists"]:
             value = data.get(key).get(attribute)
             if value:
                 command += f'{attribute}="{value}",'
