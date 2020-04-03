@@ -64,7 +64,7 @@ def loadDB(filepath):
         for attribute in ["id", "name", "students", "advisors", "wikiUrl", "wikiImage", "degreeLists"]:
             value = data.get(key).get(attribute)
             if value:
-                if attribute in ["students","advisors","degreeLists"]:
+                if attribute in ["students", "advisors", "degreeLists"]:
                     command += f'{attribute}={value},'
                 else:
                     command += f'{attribute}="{value}",'
@@ -127,5 +127,5 @@ def allLongestPaths(personID):
     cmd = f'SELECT $path AS path FROM (TRAVERSE in("E") FROM {nodeID} STRATEGY BREADTH_FIRST) ORDER BY path.size() DESC'
     response = client.command(cmd)
     for record in response:
-        print(f"Maximum distance betweeen {PersonID} and {record}")
+        print(f"Maximum distance betweeen {personID} and {record}")
     print(response)
