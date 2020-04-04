@@ -153,7 +153,7 @@ def allPathsBtwn(otherID):
         print(record)
         path = record.oRecordData["$path"]
         names = pathToNames(path)
-        print(*names)
+        print("Path:",{','.join(names)})
     client.close()
 
 
