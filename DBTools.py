@@ -106,7 +106,7 @@ def shortestPath(personIdA, personIdB):
     distance = len(pathlist[0].__getattr__('shortestPath'))
 
     print(
-        f"Nodes between {personIdA} and {personIdB} = [{','.join([x for x in pathlist[0].__getattr__('shortestPath')])}]")
+        f"Nodes between {personIdA} and {personIdB} = [{','.join([str(x) for x in pathlist[0].__getattr__('shortestPath')])}]")
     # for node in pathlist[0].__getattr__('shortestPath'):
     #     print(node)
 
@@ -150,6 +150,7 @@ def allPathsBtwn(otherID):
     cmd = f'SELECT $path FROM (TRAVERSE in("E") FROM {codyRid} STRATEGY BREADTH_FIRST) where $current = {nodeID}'
     response = client.command(cmd)
     for record in response:
+        print(record)
         path = record.oRecordData["path"]
         names = pathToNames(path)
         print(*names)
