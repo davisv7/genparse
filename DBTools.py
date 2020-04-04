@@ -104,9 +104,9 @@ def shortestPath(personIdA, personIdB):
     # get distance
     distance = len(pathlist[0].__getattr__('shortestPath'))
 
-    print(f"Nodes between {personIdA} and {personIdB}")
-    for node in pathlist[0].__getattr__('shortestPath'):
-        print(node)
+    print(f"Nodes between {personIdA} and {personIdB} = [{','.join(pathlist[0].__getattr__('shortestPath'))}]")
+    # for node in pathlist[0].__getattr__('shortestPath'):
+    #     print(node)
 
     # pyorient.otypes.OrientRecord
     client.close()
@@ -122,7 +122,7 @@ def allLongestPaths(personID):
 
     client.db_open(dbname, login, password)
 
-    # get the RID of the two people
+    # get the RID of the other
     nodeID = getrid(client, personID)
     cmd = f'SELECT $path AS path FROM (TRAVERSE in("E") FROM {nodeID} STRATEGY BREADTH_FIRST)'
     response = client.command(cmd)
@@ -130,4 +130,25 @@ def allLongestPaths(personID):
         path = record.oRecordData["path"].split(".")
         print(f"Maximum distance betweeen {nodeID} and {path[-1][5:]} is {len(path)-1}")
     # print(response)
+    client.close()
+
+
+def allPathsBtwn(otherID):
+    dbname = "agen"
+    login = "root"
+    password = "rootpwd"
+    client = pyorient.OrientDB("localhost", 2424)
+    client.db_open(dbname, login, password)
+
+    codyid = 1
+    codyRid = getrid(client,codyid)
+
+    # get the RID of the two people
+    nodeID = getrid(client, otherID)
+    cmd = f'SELECT $path FROM (TRAVERSE in("E") FROM {codyRid} STRATEGY BREADTH_FIRST) where $current = {nodeID}'
+    response = client.command(cmd)
+    # for record in response:
+    #     path = record.oRecordData["path"].split(".")
+    #     print(f"Maximum distance betweeen {nodeID} and {path[-1][5:]} is {len(path)-1}")
+    print(response)
     client.close()

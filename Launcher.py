@@ -2,7 +2,7 @@ import json
 import random
 from DBTools import printJSONDB
 from DBTools import loadDB
-from DBTools import shortestPath,allLongestPaths
+from DBTools import *
 
 #Make sure orientDB version 2.2 is running, version 3.x does not work with these drivers
 
@@ -36,6 +36,8 @@ codyid = 1
 #Distance between Cody and Copernicus
 # print(shortestPath(codyid,126177))
 
+print()
+
 #Gregory Palamas JSON id is 176844
 #Distance between Cody and Palamas
 print(f"Distance between Cody and Palamas-san: {shortestPath(codyid,176844)}")
@@ -44,4 +46,12 @@ print(f"Distance between Cody and Palamas-san: {shortestPath(codyid,176844)}")
 # print(shortestPath(codyid,randomPerson))
 #print rando info
 # print(data.get(randomPerson))
+
+
+print()
+# Get all longest paths from the Cody Node to all other nodes
 allLongestPaths(codyid)
+
+# Get all paths between Cody and Laplace
+laplaceID = 108295
+allPathsBtwn(laplaceID)
