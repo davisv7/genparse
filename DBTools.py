@@ -129,5 +129,5 @@ def allLongestPaths(personID):
     for record in response:
         path = record.oRecordData["path"].split(".")
         print(f"Maximum distance betweeen {nodeID} and {path[-1][5:]} is {len(path)-1}")
-    print(response)
+    # print(response)
     client.close()
