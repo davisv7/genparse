@@ -151,7 +151,7 @@ def allPathsBtwn(otherID):
     response = client.command(cmd)
     for record in response:
         print(record)
-        path = record.oRecordData["path"]
+        path = record.oRecordData["$path"]
         names = pathToNames(path)
         print(*names)
     client.close()
@@ -164,7 +164,7 @@ def pathToNames(pathString):
     client = pyorient.OrientDB("localhost", 2424)
     client.db_open(dbname, login, password)
 
-    rids = re.findall(r"(#\d*:{1}\d*)\w+", pathString)
+    rids = re.findall(r"#\d*:{1}\d*\w+", pathString)
     names = []
     for rid in rids:
         cmd = f"select name from person where @rid = {rid}"
