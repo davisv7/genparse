@@ -37,7 +37,6 @@ codyid = 1
 # print(shortestPath(codyid,126177))
 
 print()
-
 #Gregory Palamas JSON id is 176844
 #Distance between Cody and Palamas
 print(f"Distance between Cody and Palamas-san: {shortestPath(codyid,176844)}")
@@ -52,6 +51,8 @@ print()
 # Get all longest paths from the Cody Node to all other nodes
 allLongestPaths(codyid)
 
+
+print()
 # Get all paths between Cody and Laplace
 laplaceID = 108295
 allPathsBtwn(laplaceID)
