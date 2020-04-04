@@ -1,5 +1,6 @@
 import pyorient
 import json
+import re
 
 
 def reset_db(client, name):
@@ -104,7 +105,8 @@ def shortestPath(personIdA, personIdB):
     # get distance
     distance = len(pathlist[0].__getattr__('shortestPath'))
 
-    print(f"Nodes between {personIdA} and {personIdB} = [{','.join(pathlist[0].__getattr__('shortestPath'))}]")
+    print(
+        f"Nodes between {personIdA} and {personIdB} = [{','.join([x for x in pathlist[0].__getattr__('shortestPath')])}]")
     # for node in pathlist[0].__getattr__('shortestPath'):
     #     print(node)
 
@@ -128,7 +130,7 @@ def allLongestPaths(personID):
     response = client.command(cmd)
     for record in response:
         path = record.oRecordData["path"].split(".")
-        print(f"Maximum distance betweeen {nodeID} and {path[-1][5:]} is {len(path)-1}")
+        print(f"Maximum distance betweeen {nodeID} and {path[-1][5:]} is {len(path) - 1}")
     # print(response)
     client.close()
 
@@ -141,14 +143,30 @@ def allPathsBtwn(otherID):
     client.db_open(dbname, login, password)
 
     codyid = 1
-    codyRid = getrid(client,codyid)
+    codyRid = getrid(client, codyid)
 
     # get the RID of the two people
     nodeID = getrid(client, otherID)
     cmd = f'SELECT $path FROM (TRAVERSE in("E") FROM {codyRid} STRATEGY BREADTH_FIRST) where $current = {nodeID}'
     response = client.command(cmd)
-    # for record in response:
-    #     path = record.oRecordData["path"].split(".")
-    #     print(f"Maximum distance betweeen {nodeID} and {path[-1][5:]} is {len(path)-1}")
-    print(response)
+    for record in response:
+        path = record.oRecordData["path"]
+        names = pathToNames(path)
+        print(*names)
     client.close()
+
+
+def pathToNames(pathString):
+    dbname = "agen"
+    login = "root"
+    password = "rootpwd"
+    client = pyorient.OrientDB("localhost", 2424)
+    client.db_open(dbname, login, password)
+
+    rids = re.findall(r"(#\d*:{1}\d*)\w+", pathString)
+    names = []
+    for rid in rids:
+        cmd = f"select name from person where @rid = {rid}"
+        response = client.command(cmd)
+        print(response)
+    return names
