@@ -169,6 +169,5 @@ def pathToNames(pathString):
     for rid in rids:
         cmd = f"select name from person where @rid = {rid}"
         response = client.command(cmd)
-        for r in response:
-            print(r)
+        names.append(response[0].oRecordData["name"])
     return names
